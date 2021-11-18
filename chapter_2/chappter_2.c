@@ -67,28 +67,54 @@ void printBinary(unsigned decimal) {
   printf("%s\n", bytes);
 }
 
-unsigned setbits(unsigned x, unsigned y, int position, int number) {
-  unsigned powered = pow(2, number) - 1;
-  y = (~(~y & ~(~0 << number)) << (position - number + 1) | powered);
-  unsigned int toOr = powered << (position - number + 1);
 
-  x = x | toOr;
-  return x & y;
-  //Return x with the 'numberOf' bits that begin at 'position' set to the rightmost 'numberOf' bits of y leaving the rest unchanged
- }
+/*** EXERCISE 2.8 ***\
+\********************/
+
+unsigned rightrot(x, n) {
+  // int toMove = pow(2, 32) - 1;
+  int bits = (x & ~(~0 << n)) << (27 - n + 1);
+  x = (x >> n) | bits;
+  return x;
+}
+
+
+/*** EXERCISE 2.7 ***\
+\********************/
+
+// unsigned invert(unsigned x, int position, int number) {
+//   unsigned powered = pow(2, number) - 1;
+//   int toInvert = ~(powered << (position - number));
+//   int portion = (~(x >> (position - number)) & powered) << (position - number);
+//   x = (x & toInvert) | portion;
+//   return x;
+// }
+
+
+/*** EXERCISE 2.6 ***\
+\********************/
+
+// Return x with the 'numberOf' bits that begin at 'position' set to the rightmost 'numberOf' bits of y leaving the rest unchanged
+// unsigned setbits(unsigned x, unsigned y, int position, int number) {
+//   unsigned powered = pow(2, position - number) - 1;
+//   y = (~(~y & ~(~0 << number)) << (position - number)) | powered;
+//   unsigned int toOr = ~(~0 << number) << (position - number);
+
+//   x = x | toOr;
+//   return x & y;
+//  }
 
 // unsigned int getbits(unsigned int x, int p, int n) {
-//   // return x >> 4;
-//   // return x >> (p + 1 - n); 
+  // return x >> (p + 1 - n) & ~(~0 << n); 
 // }
 
 int main () {
-  int x = 0b10101101, p = 7, n = 4;
-  int y = 0b11001011;
-  int returned_num = setbits(x, y, p, n);
+  int x = 0b01101101, p = 7, n = 3;
+  int y = 0b10000111;
+  int returned_num = rightrot(y, 8);
+  // int returned_num = setbits(x, y, p, n);
   printBinary(returned_num);
   printf("getbits(%u (%x), %d, %d) = %u (%X)\n", x, x, p, n, returned_num, returned_num);
-
 }
 
 // int any(char string[], char match[]) {
