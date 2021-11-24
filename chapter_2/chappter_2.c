@@ -67,16 +67,30 @@ void printBinary(unsigned decimal) {
   printf("%s\n", bytes);
 }
 
+/** Exercise 2.9 **/
+
+int bitcount(unsigned x) {
+  int b;
+  while((x &= (x - 1)) != 0)
+    b++;
+
+  return ++b;
+
+}
+int main () {
+  int x = 143;
+  int returned_num = bitcount(x);
+  printf("%d", returned_num);
+}
 
 /*** EXERCISE 2.8 ***\
 \********************/
 
-unsigned rightrot(x, n) {
-  // int toMove = pow(2, 32) - 1;
-  int bits = (x & ~(~0 << n)) << (27 - n + 1);
-  x = (x >> n) | bits;
-  return x;
-}
+// unsigned rightrot(x, n) {
+//   int bits = (x & ~(~0 << n)) << (27 - n + 1);
+//   x = (x >> n) | bits;
+//   return x;
+// }
 
 
 /*** EXERCISE 2.7 ***\
@@ -108,14 +122,7 @@ unsigned rightrot(x, n) {
   // return x >> (p + 1 - n) & ~(~0 << n); 
 // }
 
-int main () {
-  int x = 0b01101101, p = 7, n = 3;
-  int y = 0b10000111;
-  int returned_num = rightrot(y, 8);
-  // int returned_num = setbits(x, y, p, n);
-  printBinary(returned_num);
-  printf("getbits(%u (%x), %d, %d) = %u (%X)\n", x, x, p, n, returned_num, returned_num);
-}
+
 
 // int any(char string[], char match[]) {
 //   int returnIndex = -1;
