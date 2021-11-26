@@ -3,85 +3,31 @@
 #include <string.h>
 #include <limits.h>
 
-void reverse_string(char string[]) {
-  int string_max_index, index, last_index;
-  string_max_index = index = last_index = 0;
 
-  while(string[index] != '\0') {
-    string_max_index++;
-    index++;
-  }
+// /*** EXERCISE 2.10 ***\
+// \********************/
 
-  string_max_index--;
-  last_index = string_max_index;
-  index = 0;
+// void lower(char *string) {
+//   int length = strlen(string);
+//   for (int i = 0; i < length; i++) {
+//     string[i] >= 41 && string[i] <= 90
+//     ? string[i] += 32
+//     : string[i]; 
+//   }
 
-  while(index <= last_index) {
-    char temp;
-    temp = string[index];
-    string[index] = string[last_index];
-    string[last_index] = temp;
-    index++;
-    last_index--;
-  }
-}
+// }
 
 
-void printBinary(unsigned decimal) {
-  const int NUMBER_BYTES = 50;
-  char bytes[NUMBER_BYTES] = { '\0' };
-  int spaceCounter = 1; 
-  
-  for (int i = 0; i < NUMBER_BYTES; i++) {
-    bytes[i] = '0';
-    int remainder = 0;
-    if (spaceCounter % 5 == 0) {
-      bytes[i] = ' ';
-      spaceCounter = 1;
-      continue;
-    }
+// /** Exercise 2.9 **/
 
-    remainder = decimal % 2;
-    decimal = floor(decimal / 2);
-    if (remainder == 1) {
-      bytes[i] = '1';
-    } 
-    
-    spaceCounter++;
-  }
+// int bitcount(unsigned x) {
+//   int b;
+//   while((x &= (x - 1)) != 0)
+//     b++;
 
-  char remainder = '0';
-  for (int i = NUMBER_BYTES; i >= 0; i--) {
-    if (remainder == '1')
-      break;
+//   return ++b;
 
-    if (i % 5 == 0) {
-      bytes[i - 1] = '\0';
-      continue;
-    }
-
-    remainder = bytes[i - 1];
-  }
-
-  reverse_string(bytes);
-  printf("%s\n", bytes);
-}
-
-/** Exercise 2.9 **/
-
-int bitcount(unsigned x) {
-  int b;
-  while((x &= (x - 1)) != 0)
-    b++;
-
-  return ++b;
-
-}
-int main () {
-  int x = 143;
-  int returned_num = bitcount(x);
-  printf("%d", returned_num);
-}
+// }
 
 /*** EXERCISE 2.8 ***\
 \********************/
