@@ -88,7 +88,7 @@
 // /*** EXERCISE 3.1 **\
 // \********************/
 
-// int binsearch(int x, int *v, int n) {
+// int search(int x, int *v, int n) {
 //   for (int i = 0; i < n - 1; i++) {
 //     if (v[i] == x)
 //       return i;
