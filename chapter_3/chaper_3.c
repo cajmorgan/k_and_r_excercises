@@ -6,6 +6,39 @@
 #include <stdbool.h>
 
 
+/*** EXERCISE 3.5 **\
+// void itob(int n, char s[], int b) {
+//   int counter = 0;
+//   int remainder = 0;
+//   char rConvert = '\0'; 
+//   while(n != 0) {
+//     remainder = n % b;
+//     if (remainder > 9) 
+//       s[counter] = remainder + 55;
+//     else
+//       s[counter] = remainder + '0';
+
+//     counter++;
+//     n /= b;
+//   };
+
+//   int j = strlen(s)-1;
+//   for (int i = 0; i < j; i++) {
+//     char temp = s[i];
+//     s[i] = s[j];
+//     s[j--] = temp;
+//   }
+  
+//   printf("%s", s);
+// }
+
+// int main() {
+//   char s[100] = {'\0'};
+//   int n = 673321; 
+//   int b = 16;
+//   itob(n, s, b);
+// }
+
 /*** EXERCISE 3.3 **\
  *
  * */
@@ -35,12 +68,6 @@
 // }
 
 //   return stringToReturn;
-// }
-
-// int main() {
-//   char s1[] = "a-cx-z";
-//   char *ret = expand(s1);
-//   printf("%s", ret);
 // }
 
 
@@ -88,7 +115,7 @@
 // /*** EXERCISE 3.1 **\
 // \********************/
 
-// int binsearch(int x, int *v, int n) {
+// int search(int x, int *v, int n) {
 //   for (int i = 0; i < n - 1; i++) {
 //     if (v[i] == x)
 //       return i;

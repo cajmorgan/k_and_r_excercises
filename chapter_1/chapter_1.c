@@ -1,13 +1,3 @@
-/** 
- * Triggers skip 
-*/
-
-/*
-MR CAJ
-*/
-
-//Hello
-
 /* Yo */
 #include <stdio.h>
 #include <stdbool.h>
