@@ -118,14 +118,6 @@
 //   }
 // }
 
-// int main () {
-//   char string[] = "hello förfanlla";
-//   char target[] = "";
-//   squeeze(string, target); 
-
-//   printf("%s", string);
-// }
-
 
 // void squeeze(char s[], char c[]) {
 //   int i, skipper, j;
