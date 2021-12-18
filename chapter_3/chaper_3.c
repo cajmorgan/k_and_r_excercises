@@ -6,38 +6,38 @@
 #include <stdbool.h>
 
 
-/*** EXERCISE 3.5 **\
-// void itob(int n, char s[], int b) {
-//   int counter = 0;
-//   int remainder = 0;
-//   char rConvert = '\0'; 
-//   while(n != 0) {
-//     remainder = n % b;
-//     if (remainder > 9) 
-//       s[counter] = remainder + 55;
-//     else
-//       s[counter] = remainder + '0';
+// /*** EXERCISE 3.5 ** 
+void itob(int n, char s[], int b) {
+  int counter = 0;
+  int remainder = 0;
+  char rConvert = '\0'; 
+  while(n != 0) {
+    remainder = n % b;
+    if (remainder > 9) 
+      s[counter] = remainder + 55;
+    else
+      s[counter] = remainder + '0';
 
-//     counter++;
-//     n /= b;
-//   };
+    counter++;
+    n = (n-remainder) / b;
+  };
 
-//   int j = strlen(s)-1;
-//   for (int i = 0; i < j; i++) {
-//     char temp = s[i];
-//     s[i] = s[j];
-//     s[j--] = temp;
-//   }
+  int j = strlen(s)-1;
+  for (int i = 0; i < j; i++) {
+    char temp = s[i];
+    s[i] = s[j];
+    s[j--] = temp;
+  }
   
-//   printf("%s", s);
-// }
+  printf("%s", s);
+}
 
-// int main() {
-//   char s[100] = {'\0'};
-//   int n = 673321; 
-//   int b = 16;
-//   itob(n, s, b);
-// }
+int main() {
+  char s[100] = {'\0'};
+  int n = 673321; 
+  int b = 16;
+  itob(n, s, b);
+}
 
 /*** EXERCISE 3.3 **\
  *
