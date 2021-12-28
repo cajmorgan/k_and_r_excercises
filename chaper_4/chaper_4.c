@@ -8,6 +8,110 @@
 
 
 
+/** Exercise 4.3* Reverse Polish Calculator
+ * The excercises for this one was a bit complicated/ambigious
+ * so I decided to implement my own rev polish calculator
+ * using a bit different kind of logic than the example in K&R
+ *  **/
+#define NUMBER 1
+
+int get_next(char next) {
+
+  if (next == ' ') {
+    return ' ';
+  }
+
+  if (isdigit(next)) {
+    return NUMBER;
+  }
+
+  return next;
+}
+
+int pop_off_stack(int stack[], int *counter) {
+  int popped_value = stack[*counter-1];
+  stack[*counter-1] = 0;
+  *counter -= 1;
+
+  return popped_value;
+}
+
+void push_to_stack(int stack[], int value, int *counter) {
+  stack[*counter] = value; 
+  *counter += 1;
+}
+
+void rev_polish_calc(char string_to_calc[]) {
+  int length = strlen(string_to_calc);
+  int stack[100] = {0};
+  int stack_counter = 0;
+
+  for (int i = 0; i < length; i++) {
+    switch(get_next(string_to_calc[i])) {
+      case ' ': {
+        break;
+      } case NUMBER: {
+        int next_number = 0;
+        while(get_next(string_to_calc[i]) == NUMBER) {
+          next_number = (next_number * 10) + string_to_calc[i] - '0';
+          i++;
+        }
+        push_to_stack(stack, next_number, &stack_counter);
+        break;
+      } case '+': {
+        int sum = pop_off_stack(stack, &stack_counter) + pop_off_stack(stack, &stack_counter);
+        stack[stack_counter] = sum;
+        stack_counter++;
+
+        break;
+      } case '*': {
+        int product = pop_off_stack(stack, &stack_counter) * pop_off_stack(stack, &stack_counter);
+        stack[stack_counter] = product;
+        stack_counter++;
+
+        break;
+      } case '-' : {
+        int second_val = pop_off_stack(stack, &stack_counter);
+        int difference = pop_off_stack(stack, &stack_counter) - second_val;
+        stack[stack_counter] = difference;
+        stack_counter++;
+
+        break;
+      } case '/': {
+        int second_val = pop_off_stack(stack, &stack_counter);
+        int quotient = pop_off_stack(stack, &stack_counter) / second_val;
+        stack[stack_counter] = quotient;
+        stack_counter++;
+
+        break;
+      } case '%': {
+        int second_val = pop_off_stack(stack, &stack_counter);
+        int remainder = pop_off_stack(stack, &stack_counter) % second_val;
+        stack[stack_counter] = remainder;
+        stack_counter++;
+
+        break;
+      }
+
+    }
+  }
+
+  for (int i = 0; i < stack_counter; i++) {
+    printf("%d", stack[i]);
+  }
+
+
+}
+
+int main() {
+  char string_to_calc[] = "5 4 * 3 2 % +";
+
+  rev_polish_calc(string_to_calc);
+
+}
+
+
+
 /** Exercise 4.2 **\
 | Converts string  |
 | of fp to double  |
