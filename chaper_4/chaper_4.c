@@ -8,107 +8,140 @@
 
 
 
+/** Exercise  4.12 & 4.13 **/
+
+// int rec_reverse(char string[], int low, int high) {
+//   if (low >= high) {
+//     return 0;
+//   }
+
+//   char temp = string[low];
+//   string[low] = string[high];
+//   string[high] = temp;
+//   rec_reverse(string, low+1, high-1);
+// }
+
+// int rec_itoa(int input, char string[], int counter) {
+//   if (input <= 0) {
+//     rec_reverse(string, 0, counter-1);
+//     printf("%s", string);
+//     return 0;
+//   }
+
+//   int modified = (input - ((input / 10) * 10)) + '0';
+//   string[counter++] = modified;
+
+//   rec_itoa(input/10, string, counter);
+// }
+
+
+// int main() {
+//   int input = 532110;
+//   char string[6];
+//   rec_itoa(input, string, 0);
+
+// }
 /** Exercise 4.3* Reverse Polish Calculator
  * The excercises for this one was a bit complicated/ambigious
  * so I decided to implement my own rev polish calculator
  * using a bit different kind of logic than the example in K&R
  *  **/
-#define NUMBER 1
+// #define NUMBER 1
 
-int get_next(char next) {
+// int get_next(char next) {
 
-  if (next == ' ') {
-    return ' ';
-  }
+//   if (next == ' ') {
+//     return ' ';
+//   }
 
-  if (isdigit(next)) {
-    return NUMBER;
-  }
+//   if (isdigit(next)) {
+//     return NUMBER;
+//   }
 
-  return next;
-}
+//   return next;
+// }
 
-int pop_off_stack(int stack[], int *counter) {
-  int popped_value = stack[*counter-1];
-  stack[*counter-1] = 0;
-  *counter -= 1;
+// int pop_off_stack(int stack[], int *counter) {
+//   int popped_value = stack[*counter-1];
+//   stack[*counter-1] = 0;
+//   *counter -= 1;
 
-  return popped_value;
-}
+//   return popped_value;
+// }
 
-void push_to_stack(int stack[], int value, int *counter) {
-  stack[*counter] = value; 
-  *counter += 1;
-}
+// void push_to_stack(int stack[], int value, int *counter) {
+//   stack[*counter] = value; 
+//   *counter += 1;
+// }
 
-void rev_polish_calc(char string_to_calc[]) {
-  int length = strlen(string_to_calc);
-  int stack[100] = {0};
-  int stack_counter = 0;
+// void rev_polish_calc(char string_to_calc[]) {
+//   int length = strlen(string_to_calc);
+//   int stack[100] = {0};
+//   int stack_counter = 0;
 
-  for (int i = 0; i < length; i++) {
-    switch(get_next(string_to_calc[i])) {
-      case ' ': {
-        break;
-      } case NUMBER: {
-        int next_number = 0;
-        while(get_next(string_to_calc[i]) == NUMBER) {
-          next_number = (next_number * 10) + string_to_calc[i] - '0';
-          i++;
-        }
-        push_to_stack(stack, next_number, &stack_counter);
-        break;
-      } case '+': {
-        int sum = pop_off_stack(stack, &stack_counter) + pop_off_stack(stack, &stack_counter);
-        stack[stack_counter] = sum;
-        stack_counter++;
+//   for (int i = 0; i < length; i++) {
+//     switch(get_next(string_to_calc[i])) {
+//       case ' ': {
+//         break;
+//       } case NUMBER: {
+//         int next_number = 0;
+//         while(get_next(string_to_calc[i]) == NUMBER) {
+//           next_number = (next_number * 10) + string_to_calc[i] - '0';
+//           i++;
+//         }
+//         push_to_stack(stack, next_number, &stack_counter);
+//         break;
+//       } case '+': {
+//         int sum = pop_off_stack(stack, &stack_counter) + pop_off_stack(stack, &stack_counter);
+//         stack[stack_counter] = sum;
+//         stack_counter++;
 
-        break;
-      } case '*': {
-        int product = pop_off_stack(stack, &stack_counter) * pop_off_stack(stack, &stack_counter);
-        stack[stack_counter] = product;
-        stack_counter++;
+//         break;
+//       } case '*': {
+//         int product = pop_off_stack(stack, &stack_counter) * pop_off_stack(stack, &stack_counter);
+//         stack[stack_counter] = product;
+//         stack_counter++;
 
-        break;
-      } case '-' : {
-        int second_val = pop_off_stack(stack, &stack_counter);
-        int difference = pop_off_stack(stack, &stack_counter) - second_val;
-        stack[stack_counter] = difference;
-        stack_counter++;
+//         break;
+//       } case '-' : {
+//         int second_val = pop_off_stack(stack, &stack_counter);
+//         int difference = pop_off_stack(stack, &stack_counter) - second_val;
+//         stack[stack_counter] = difference;
+//         stack_counter++;
 
-        break;
-      } case '/': {
-        int second_val = pop_off_stack(stack, &stack_counter);
-        int quotient = pop_off_stack(stack, &stack_counter) / second_val;
-        stack[stack_counter] = quotient;
-        stack_counter++;
+//         break;
+//       } case '/': {
+//         int second_val = pop_off_stack(stack, &stack_counter);
+//         int quotient = pop_off_stack(stack, &stack_counter) / second_val;
+//         stack[stack_counter] = quotient;
+//         stack_counter++;
 
-        break;
-      } case '%': {
-        int second_val = pop_off_stack(stack, &stack_counter);
-        int remainder = pop_off_stack(stack, &stack_counter) % second_val;
-        stack[stack_counter] = remainder;
-        stack_counter++;
+//         break;
+//       } case '%': {
+//         int second_val = pop_off_stack(stack, &stack_counter);
+//         int remainder = pop_off_stack(stack, &stack_counter) % second_val;
+//         stack[stack_counter] = remainder;
+//         stack_counter++;
 
-        break;
-      }
+//         break;
+//       }
 
-    }
-  }
+//     }
+//   }
 
-  for (int i = 0; i < stack_counter; i++) {
-    printf("%d", stack[i]);
-  }
+//   for (int i = 0; i < stack_counter; i++) {
+//     printf("%d", stack[i]);
+//   }
 
 
-}
+// }
 
-int main() {
-  char string_to_calc[] = "5 4 * 3 2 % +";
+// int main() {
+//   char string_to_calc[] = "5 4 * 3 2 % +";
 
-  rev_polish_calc(string_to_calc);
+//   rev_polish_calc(string_to_calc);
 
-}
+// }
 
 
 
